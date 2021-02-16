@@ -55,7 +55,7 @@ while True:
             print ("Goodbye")
             break
 
-         elif liner[0] == 'delete' or liner[0] == 'del':
+         elif liner[0] == 'delete' or liner[0] == 'del' or liner[0] == 'rm':
             try:
                ftp.delete(liner[1])
                print ("[\x1B[32m+\x1B[37m] Command received successfully!")
@@ -82,21 +82,36 @@ while True:
                except ftplib.all_errors as e:
                   print ("[\x1B[31m-\x1B[37m] "+str(e))
 
+         elif liner[0] == 'mkdir' or liner[0] == 'mkd':
+               try:
+                  ftp.mkd(liner[1])
+                  print ("[\x1B[32m+\x1B[37m] Command received successfully!")
+               except ftplib.all_errors as e:
+                  print ("[\x1B[31m-\x1B[37m] "+str(e))
+
+         elif liner[0] == 'rmdir' or liner[0] == 'rmd':
+               try:
+                  ftp.rmd(liner[1])
+                  print ("[\x1B[32m+\x1B[37m] Command received successfully!")
+               except ftplib.all_errors as e:
+                  print ("[\x1B[31m-\x1B[37m] "+str(e))
+
          elif liner[0] == 'help':
             print ("")
-            print ("FTP-Shell - Simple FTP client made by Andreyoss for Anonymous FTP Vulnerability")
+            print ("FTP-Shell - Simple and advanced FTP client made by Andreyoss on python3")
             print ("")
             print ("Command                                        Description")
             print ("===========================================================")
             print ("")
             print ("cd <remote-folder>                             Change folder")
             print ("dir/ls                                         List of all dirs/files")
-            print ("delete/del <remote-file>                       Delete file/folder")
+            print ("delete/del/rm <remote-file>                    Delete file/folder")
             print ("help                                           Help reference")
             print ("exit                                           Goodbye :)")
             print ("pwd                                            Path to your folder")
             print ("rename <fromname> <toname>                     Rename file")
-            print ("")
+            print ("mkd/mkdir <name>                               Create directory")
+            print ("rmd/rmdir <name>                               Delete directory")
 
          else:
             print ("[\x1B[31m-\x1B[37m] Invalid command")
